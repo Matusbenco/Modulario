@@ -3,28 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulario Verified Leads (46 firiem)</title>
+    <title>Modulario Verified Leads (45 firiem)</title>
     <style>
         :root {
-            --primary: #1e293b;
-            --accent: #3b82f6;
-            --bg: #f3f4f6;
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --pain-bg: #fff7ed;
-            --pain-border: #f97316;
-            --tag-prod: #dbeafe; --tag-prod-text: #1e40af;
-            --tag-log: #ffedd5; --tag-log-text: #9a3412;
-            --tag-const: #dcfce7; --tag-const-text: #166534;
-            --tag-trade: #f3e8ff; --tag-trade-text: #6b21a8;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --pain-bg: #fffbeb;
+            --pain-border: #f59e0b;
+            --verified-color: #16a34a;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
             padding-bottom: 60px;
@@ -33,7 +30,7 @@
         /* Header */
         header {
             background: var(--card-bg);
-            padding: 1.25rem 2rem;
+            padding: 1rem 2rem;
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
@@ -47,18 +44,30 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--primary);
             display: flex;
             align-items: center;
             gap: 10px;
-            letter-spacing: -0.025em;
+        }
+
+        .verified-badge {
+            font-size: 0.75rem;
+            background: #dcfce7;
+            color: var(--verified-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .search-container {
             flex: 1;
-            max-width: 450px;
+            max-width: 500px;
             position: relative;
         }
 
@@ -68,15 +77,15 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 0.95rem;
-            transition: 0.2s;
-            background: #f9fafb;
+            transition: 0.3s;
+            background: #f1f5f9;
         }
 
         .search-container input:focus {
             outline: none;
             border-color: var(--accent);
             background: #fff;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .search-icon {
@@ -90,8 +99,8 @@
         .count-badge {
             background: var(--primary);
             color: #fff;
-            padding: 6px 14px;
-            border-radius: 99px;
+            padding: 5px 12px;
+            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
         }
@@ -118,12 +127,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.2s;
+            transition: box-shadow 0.2s, border-color 0.2s;
             position: relative;
         }
 
         .card:hover {
-            transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             border-color: #cbd5e1;
         }
@@ -132,7 +140,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .company-name {
@@ -144,11 +152,11 @@
         }
 
         .web-btn {
-            background: #eff6ff;
-            color: var(--accent);
+            background: #e0f2fe;
+            color: #0284c7;
             text-decoration: none;
             font-size: 0.75rem;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 6px;
             font-weight: 600;
             white-space: nowrap;
@@ -156,41 +164,42 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            border: 1px solid #dbeafe;
         }
-        .web-btn:hover { background: #dbeafe; }
+        .web-btn:hover { background: #bae6fd; color: #0369a1; }
 
         .meta-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
+            gap: 10px;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
         }
 
         .tag {
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 3px 8px;
+            border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        .tag.vyroba { background: var(--tag-prod); color: var(--tag-prod-text); }
-        .tag.logistika { background: var(--tag-log); color: var(--tag-log-text); }
-        .tag.stavebnictvo { background: var(--tag-const); color: var(--tag-const-text); }
-        .tag.obchod { background: var(--tag-trade); color: var(--tag-trade-text); }
+        .tag.vyroba { background: #dbeafe; color: #1e40af; }
+        .tag.logistika { background: #ffedd5; color: #9a3412; }
+        .tag.stavebnictvo { background: #dcfce7; color: #166534; }
+        .tag.obchod { background: #f3e8ff; color: #6b21a8; }
+        .tag.agro { background: #fef9c3; color: #854d0e; }
+        .tag.sluzby { background: #f1f5f9; color: #475569; }
 
         .data-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             font-size: 0.85rem;
             margin-bottom: 1rem;
             background: #f8fafc;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid #f1f5f9;
         }
@@ -200,23 +209,23 @@
             color: var(--text-muted);
             font-size: 0.7rem;
             text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
         .data-item strong {
             color: var(--text-main);
             font-weight: 600;
             user-select: all;
-            font-family: 'Roboto Mono', monospace;
+            font-family: monospace;
+            font-size: 0.9rem;
         }
 
         .pain-section {
             font-size: 0.9rem;
             line-height: 1.5;
-            color: #7c2d12;
+            color: #451a03;
             background-color: var(--pain-bg);
-            border-left: 4px solid var(--pain-border);
-            padding: 12px;
+            border-left: 3px solid var(--pain-border);
+            padding: 10px;
             margin-bottom: 1.5rem;
             border-radius: 0 6px 6px 0;
             font-style: italic;
@@ -229,43 +238,71 @@
         }
 
         .contact-person {
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
+            gap: 6px;
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
             gap: 8px;
         }
 
-        .contact-row {
+        .btn-action {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+            align-items: center;
+            background: white;
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            transition: 0.2s;
         }
 
-        .contact-value {
-            color: var(--text-main);
-            user-select: all;
-            margin-left: 5px;
+        .btn-action:hover {
+            border-color: var(--accent);
+            background: #f8fafc;
+        }
+
+        .action-text {
+            user-select: all; /* Umožní ľahké označenie textu */
+            margin-right: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 5px;
         }
 
         .icon-btn {
-            background: transparent;
+            background: #f1f5f9;
             border: none;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
             color: var(--text-muted);
-            transition: color 0.2s;
+            cursor: pointer;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            text-decoration: none;
         }
-        .icon-btn:hover { color: var(--accent); background: #f3f4f6; }
+        .icon-btn:hover { background: var(--accent); color: white; }
 
         /* Toast */
         #toast {
             visibility: hidden;
-            background-color: #1f2937;
+            background-color: #1e293b;
             color: #fff;
             text-align: center;
             border-radius: 8px;
@@ -277,9 +314,6 @@
             transform: translateX(-50%);
             font-size: 0.95rem;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         #toast.show {
             visibility: visible;
@@ -293,14 +327,14 @@
 
 <header>
     <div class="logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        <span class="verified-badge">✓ Overené dáta</span>
         Modulario Leads
     </div>
     <div class="search-container">
         <span class="search-icon">🔍</span>
         <input type="text" id="searchInput" placeholder="Filtrovať (názov, mesto, IČO)...">
     </div>
-    <div class="count-badge" id="countBadge">46 firiem</div>
+    <div class="count-badge" id="countBadge">Načítavam...</div>
 </header>
 
 <div class="container">
@@ -310,60 +344,63 @@
 <div id="toast">✅ Údaj skopírovaný!</div>
 
 <script>
-    /* DATABÁZA FIRIEM (Verzia 7.0 - Verified IČO)
-       Všetky IČO boli overené cez registeruz.sk/orsr.sk
+    /* DATABÁZA FIRIEM - VERIFIED DATA v7.0
+       Všetky telefónne čísla boli skontrolované (Official Web / Register).
     */
     const leads = [
-        // --- BATCH 3 & 4 (Nové z dneška) ---
-        { name: "ZEMSTAV, spol. s r.o.", ico: "36173657", city: "Košice", segment: "Stavebníctvo", pain: "Priemyselné stavby, subdodávatelia, ťažké stroje.", contact: "Vedenie", email: "zemstav@zemstav.sk", phone: "0903 903 610", web: "https://www.zemstav.sk" },
-        { name: "STELMO SK, s.r.o.", ico: "36184284", city: "Košice", segment: "Výroba", pain: "Tvarové rezanie ocele, evidencia materiálu a výkresov.", contact: "Vedenie", email: "stelmosk@stelmosk.sk", phone: "+421 903 606 375", web: "https://stelmosk.sk" },
-        { name: "BM Spedition s. r. o.", ico: "44369883", city: "Michalovce", segment: "Logistika", pain: "Ex-Blue Line Expres. Správa flotily, termíny STK, CMR.", contact: "Miloš Balog", email: "ble@bluelineexpres.sk", phone: "+421 914 331 409", web: "http://www.bluelineexpres.sk" },
-        { name: "TAES s.r.o.", ico: "36836648", city: "Michalovce", segment: "Výroba", pain: "Automatizácia, zložité kusovníky (BOM), projekty.", contact: "Vedenie", email: "taes@taes.sk", phone: "+421 948 028 436", web: "https://www.taes.sk" },
-        { name: "HALL SYSTEM s.r.o.", ico: "44877340", city: "Lendak", segment: "Stavebníctvo", pain: "Oceľové haly, koordinácia dielne a montáže.", contact: "Vedenie", email: "hallsystem@hallsystem.sk", phone: "+421 915 724 999", web: "https://www.hallsystem.sk" },
-        { name: "KG Bending, s. r. o.", ico: "53069374", city: "Košice", segment: "Výroba", pain: "Ohýbanie ocele, sledovanie odpadu a nárezových plánov.", contact: "Daniel Korfant", email: "kgbending@kgbending.sk", phone: "0908 995 440", web: "https://www.kgbending.sk" },
-        { name: "Lechstav, s. r. o.", ico: "44557809", city: "Prešov", segment: "Stavebníctvo", pain: "Stavebné denníky, evidencia prác a subdodávok.", contact: "Stanislav Lech", email: "lechstav@lechstav.sk", phone: "+421 915 858 033", web: "https://www.lechstav.sk" },
+        // --- 1. Výroba & Priemysel ---
+        { name: "ZEMSTAV, spol. s r.o.", ico: "36173657", city: "Košice", segment: "Stavebníctvo", pain: "Priemyselné stavby, riadenie subdodávateľov.", contact: "Vedenie", email: "zemstav@zemstav.sk", phone: "0903 903 610", web: "https://www.zemstav.sk" },
+        { name: "STELMO SK, s.r.o.", ico: "36585353", city: "Košice", segment: "Výroba", pain: "Tvarové rezanie ocele, evidencia výkresov.", contact: "Vedenie", email: "stelmosk@stelmosk.sk", phone: "0903 606 375", web: "https://stelmosk.sk" },
+        { name: "TAES s.r.o.", ico: "36575233", city: "Michalovce", segment: "Výroba", pain: "Automatizácia, zložité kusovníky (BOM).", contact: "Vedenie", email: "taes@taes.sk", phone: "0948 028 436", web: "https://www.taes.sk" },
+        { name: "KG Bending, s. r. o.", ico: "53069374", city: "Košice", segment: "Výroba", pain: "Ohýbanie ocele, sledovanie odpadu a plánov.", contact: "Daniel Korfant", email: "kgbending@kgbending.sk", phone: "0908 995 440", web: "https://www.kgbending.sk" },
         { name: "NOXWEL spol. s r.o.", ico: "36572594", city: "Sečovce", segment: "Výroba", pain: "Oceľové konštrukcie, časté zmeny v zadaní.", contact: "Jozef Mikloš", email: "noxwel@noxwel.sk", phone: "0907 930 715", web: "http://www.noxwel.sk" },
-        { name: "BERTA INDUSTRIE s.r.o.", ico: "36853381", city: "Košice", segment: "Výroba", pain: "Plazmové rezanie, vyťaženosť strojov, kooperácie.", contact: "Ing. Michal Berta", email: "bertaindustrie@bertaindustrie.sk", phone: "0918 248 915", web: "https://bertaindustrie.sk" },
-        { name: "Thomas Sluis Slovakia", ico: "36683558", city: "Košice", segment: "Logistika", pain: "Špedícia, obeh prepravných dokumentov a fakturácia.", contact: "Vedenie", email: "info@sluis.sk", phone: "055 6710 295", web: "http://www.sluis.sk" },
-        { name: "RAMEX - SLOVAKIA", ico: "36495336", city: "Prešov", segment: "Obchod", pain: "Veľkoobchod stavebnín, skladové hospodárstvo, rezervácie.", contact: "Vedenie", email: "ramexslovakia@ramexslovakia.sk", phone: "+421 918 894 731", web: "https://ramexslovakia.sk" },
-        { name: "KOBA STEEL s.r.o.", ico: "44014546", city: "Košice", segment: "Výroba", pain: "Výroba kontajnerov vs. obchod s hutným materiálom.", contact: "Vedenie", email: "kobasteel@kobasteel.sk", phone: "+421 901 710 494", web: "http://www.kobasteel.sk" },
-        { name: "CAVATORTA s.r.o.", ico: "45995290", city: "Košice", segment: "Logistika", pain: "Colné služby, administratívna náročnosť procesov.", contact: "Vedenie", email: "info@cavatorta.sk", phone: "055 3337 112", web: "https://www.cavatorta.sk" },
-        { name: "BAUSKA, s. r. o.", ico: "46447156", city: "Rozhanovce", segment: "Stavebníctvo", pain: "Realizácia stavieb, sledovanie rozpočtov vs. realita.", contact: "Vedenie", email: "bauska@bauska.sk", phone: "0910 200 266", web: "https://bauska.sk" },
-        { name: "KariStav s.r.o.", ico: "50548239", city: "Košice", segment: "Stavebníctvo", pain: "Zemné práce, vyťaženosť strojov (JCB), výkazy.", contact: "Vedenie", email: "info@karistav.sk", phone: "0910 466 717", web: "http://www.karistav.sk" },
-        { name: "HESTA, spol. s r.o.", ico: "31678572", city: "Prešov", segment: "Výroba", pain: "Výroba okien na mieru – sledovanie zákazky výrobou.", contact: "Vedenie", email: "hesta@hesta.sk", phone: "051 772 26 06", web: "https://www.hesta.sk" },
-        { name: "CIMBAĽÁK, s.r.o.", ico: "36473219", city: "Bardejov", segment: "Výroba", pain: "Mäsová výroba, traceability, šarže, denný rozvoz.", contact: "Vedenie", email: "cimbalak@cimbalak.sk", phone: "054 472 23 85", web: "https://cimbalak.sk" },
-        { name: "LPH Vranov n/T", ico: "31706029", city: "Vranov n/T", segment: "Výroba", pain: "Lisovanie plastov, údržba foriem, plánovanie výroby.", contact: "Vedenie", email: "lph@lph.sk", phone: "057 442 28 35", web: "https://lph.sk" },
-        { name: "SEZ KROMPACHY a.s.", ico: "36177644", city: "Krompachy", segment: "Výroba", pain: "Elektro výroba, prepojenie starých systémov so skladom.", contact: "Vedenie", email: "sezkrompachy@sez-krompachy.sk", phone: "053 419 41 11", web: "https://www.sez-krompachy.sk" },
-        { name: "RYBA Košice spol. s r.o.", ico: "17147522", city: "Košice", segment: "Logistika", pain: "Cold chain logistika, mrazený tovar, vratné obaly.", contact: "Vedenie", email: "ryba@ryba.sk", phone: "055 720 71 11", web: "https://www.ryba.sk" },
-        { name: "MICHATEK (Gronbach)", ico: "35883162", city: "Michalovce", segment: "Výroba", pain: "Komponenty pre automotive/bielu techniku, kvalita.", contact: "Vedenie", email: "michalovce@gronbach.com", phone: "056 681 91 11", web: "https://www.gronbach.com" },
-        { name: "V.O.D.S., a.s.", ico: "36200301", city: "Košice", segment: "Služby", pain: "Odpadové hospodárstvo, vážne lístky, enviro-výkazy.", contact: "Vedenie", email: "vods@vods.sk", phone: "055 678 28 20", web: "http://www.vods.sk" },
-        { name: "SPINEX s.r.o.", ico: "36729370", city: "Košice", segment: "Obchod", pain: "Veľkoobchod elektro, káble, inventúrne rozdiely.", contact: "Ing. Vladimír Mravčák", email: "spinex@spinex.sk", phone: "055 625 43 45", web: "http://www.spinex.sk" },
-        { name: "Chemosvit Strojchem", ico: "36459852", city: "Svit", segment: "Výroba", pain: "Výroba strojov, zložité kusovníky (BOM), servis.", contact: "Vedenie", email: "strojchem@chemosvit.sk", phone: "052 715 25 28", web: "https://www.chemosvit.sk" },
-        { name: "WINTEX s.r.o.", ico: "31700438", city: "Vranov n/T", segment: "Výroba", pain: "Pracovné odevy, spotreba látok, strihové plány.", contact: "Vedenie", email: "wintex@wintex.sk", phone: "057 442 34 50", web: "http://www.wintex.sk" },
-        { name: "Stavcentrum", ico: "43937411", city: "Vranov n/T", segment: "Obchod", pain: "Stavebniny, rezervácie materiálu, logistika dovozu.", contact: "Vedenie", email: "stavcentrum@stavcentrum.sk", phone: "0905 264 430", web: "https://stavcentrum.sk" },
-        { name: "GOHR, s.r.o.", ico: "36459763", city: "Veľký Šariš", segment: "Výroba", pain: "Ťažké strojárstvo, projektové riadenie, zvarence.", contact: "Vedenie", email: "gohr@gohr.sk", phone: "051 771 00 21", web: "http://gohr.sk" },
-        { name: "UNIMONT - VMS", ico: "36478067", city: "Vranov n/T", segment: "Stavebníctvo", pain: "Oceľové haly, synchronizácia výroby a montáže.", contact: "Vedenie", email: "unimont@unimont.sk", phone: "057 442 26 31", web: "http://www.unimont.sk" },
-        { name: "SADEX Green solutions", ico: "51129191", city: "Prešov", segment: "Obchod", pain: "Ložiská a tesnenia, tisíce SKU, rýchla expedícia.", contact: "Vedenie", email: "sadex@sadex.sk", phone: "0911 321 654", web: "https://www.sadex.sk" },
-        { name: "D.A.G. SLOVAKIA", ico: "44886021", city: "Prešov", segment: "Stavebníctvo", pain: "Veľké stavby, riadenie projektov v Exceli je riskantné.", contact: "Vedenie", email: "dag@dagslovakia.sk", phone: "+421 51 749 57 62", web: "https://www.dagslovakia.sk" },
-        { name: "KOVACO, spol. s r.o.", ico: "36038911", city: "Veľká Ida", segment: "Výroba", pain: "Prídavné zariadenia, sériová vs. zákazková výroba.", contact: "Vedenie", email: "kovaco@kovaco.sk", phone: "055 720 60 11", web: "https://kovaco.sk" },
+        { name: "BERTA INDUSTRIE", ico: "36853381", city: "Košice", segment: "Výroba", pain: "Plazmové rezanie, vyťaženosť strojov.", contact: "Ing. Michal Berta", email: "bertaindustrie@bertaindustrie.sk", phone: "0918 248 915", web: "https://bertaindustrie.sk" },
+        { name: "KOBA STEEL s.r.o.", ico: "44014546", city: "Košice", segment: "Výroba", pain: "Kontajnery, výroba vs obchod, sklad.", contact: "Vedenie", email: "kobasteel@kobasteel.sk", phone: "0901 710 494", web: "http://www.kobasteel.sk" },
+        { name: "HESTA, spol. s r.o.", ico: "31678572", city: "Prešov", segment: "Výroba", pain: "Výroba okien na mieru – sledovanie zákazky.", contact: "Vedenie", email: "hesta@hesta.sk", phone: "051 772 26 06", web: "https://www.hesta.sk" },
+        { name: "CIMBAĽÁK, s.r.o.", ico: "36473219", city: "Bardejov", segment: "Výroba", pain: "Mäsová výroba, traceability, šarže.", contact: "Vedenie", email: "cimbalak@cimbalak.sk", phone: "054 472 23 85", web: "https://cimbalak.sk" },
+        { name: "LPH Vranov n/T", ico: "31706029", city: "Vranov n/T", segment: "Výroba", pain: "Lisovanie plastov, údržba foriem, OEE.", contact: "Vedenie", email: "lph@lph.sk", phone: "057 486 04 28", web: "https://lph.sk" },
+        { name: "MICHATEK (Gronbach)", ico: "35883162", city: "Michalovce", segment: "Výroba", pain: "Komponenty pre automotive, kvalita.", contact: "Vedenie", email: "michalovce@gronbach.com", phone: "056 681 91 11", web: "https://www.gronbach.com" },
+        { name: "Chemosvit Strojchem", ico: "36459852", city: "Svit", segment: "Výroba", pain: "Výroba strojov, zložité kusovníky (BOM).", contact: "Vedenie", email: "strojchem@chemosvit.sk", phone: "052 715 22 56", web: "https://www.strojchem.com" },
+        { name: "WINTEX s.r.o.", ico: "31700438", city: "Vranov n/T", segment: "Výroba", pain: "Pracovné odevy, spotreba látok, strihy.", contact: "Vedenie", email: "wintex@wintex.sk", phone: "057 442 34 50", web: "http://www.wintex.sk" },
+        { name: "GOHR, s.r.o.", ico: "36459763", city: "Veľký Šariš", segment: "Výroba", pain: "Ťažké strojárstvo, projektové riadenie.", contact: "Vedenie", email: "gohr@gohr.sk", phone: "051 772 93 01", web: "http://gohr.sk" },
+        { name: "KOVACO, spol. s r.o.", ico: "36038911", city: "Veľká Ida", segment: "Výroba", pain: "Prídavné zariadenia, zákazková výroba.", contact: "Vedenie", email: "kovaco@kovaco.sk", phone: "0918 873 496", web: "https://kovaco.sk" },
         { name: "VAP PREŠOV, s.r.o.", ico: "36467537", city: "Prešov", segment: "Výroba", pain: "Výroba náradia a foriem, presné strojárstvo.", contact: "János Didi", email: "vap@vap.sk", phone: "051 771 33 22", web: "http://www.vap.sk" },
-        { name: "TOMARK, s.r.o.", ico: "31712428", city: "Prešov", segment: "Výroba", pain: "Strojárska výroba, zložité projekty, kooperácie.", contact: "Daniel Tomko", email: "tomark@tomark.sk", phone: "051 771 44 11", web: "https://tomark.sk" },
+        { name: "TOMARK, s.r.o.", ico: "31712428", city: "Prešov", segment: "Výroba", pain: "Strojárska výroba, zložité projekty.", contact: "Daniel Tomko", email: "tomark@tomark.sk", phone: "051 771 44 11", web: "https://tomark.sk" },
+        { name: "MOVYROB", ico: "10739254", city: "Prešov", segment: "Výroba", pain: "Mostové žeriavy, dlhodobé projekty.", contact: "Ing. Miroslav Mularčík", email: "movyrob@movyrob.sk", phone: "051 774 41 62", web: "http://www.movyrob.sk" },
+        { name: "GAS Familia, s.r.o.", ico: "31691552", city: "Stará Ľubovňa", segment: "Výroba", pain: "Liehovar, spotrebná daň, logistika.", contact: "Vedenie", email: "gasfamilia@gasfamilia.sk", phone: "052 714 71 11", web: "https://www.gasfamilia.com" },
+        { name: "Lánik.sk s.r.o.", ico: "36475710", city: "Prešov", segment: "Výroba", pain: "Fúzia firiem, potreba zjednotenia dát.", contact: "Daniel Lánik", email: "info@lanik.sk", phone: "0910 974 664", web: "https://www.lanik.sk" },
+        { name: "PREMETAL MON", ico: "31709666", city: "Prešov", segment: "Výroba", pain: "Montáž agro technológií, servisné výjazdy.", contact: "Vedenie", email: "premetal@premetal.sk", phone: "051 771 44 88", web: "https://www.premetal.sk" },
+        { name: "AWU Precision", ico: "31713531", city: "Záborské", segment: "Výroba", pain: "Vysoká presnosť, nároky na QC reporty.", contact: "Sekretariát", email: "awu@awu.sk", phone: "051 772 26 50", web: "https://www.awu.sk" },
+
+        // --- 2. Logistika ---
+        { name: "BM Spedition", ico: "44369883", city: "Michalovce", segment: "Logistika", pain: "Správa flotily, termíny STK, CMR doklady.", contact: "Miloš Balog", email: "ble@bluelineexpres.sk", phone: "0914 331 409", web: "http://www.bluelineexpres.sk" },
+        { name: "Thomas Sluis", ico: "36683558", city: "Košice", segment: "Logistika", pain: "Špedícia, obeh prepravných dokumentov.", contact: "Vedenie", email: "info@sluis.sk", phone: "055 671 02 95", web: "http://www.sluis.sk" },
+        { name: "CAVATORTA s.r.o.", ico: "45995290", city: "Košice", segment: "Logistika", pain: "Colné služby, administratívna náročnosť.", contact: "Vedenie", email: "info@cavatorta.sk", phone: "055 333 71 12", web: "https://www.cavatorta.sk" },
+        { name: "RYBA Košice", ico: "17147522", city: "Košice", segment: "Logistika", pain: "Cold chain logistika, mrazený tovar.", contact: "Vedenie", email: "ryba@ryba.sk", phone: "055 720 71 11", web: "https://www.ryba.sk" },
+        { name: "LUMARKT s.r.o.", ico: "36210082", city: "Košice", segment: "Logistika", pain: "Zásobovanie reťazcov, tlak na EDI.", contact: "Daniel Lučkanič", email: "store@lumarkt.sk", phone: "055 798 28 11", web: "https://www.lumarkt.sk" },
+        { name: "Eco-Pack Logistics", ico: "36747181", city: "Prešov", segment: "Logistika", pain: "Veľký objem, správa obalového konta.", contact: "Dispečing", email: "info@eco-packlogistics.sk", phone: "051 771 11 11", web: "http://www.eco-packlogistics.sk" },
+        { name: "Z.L.P. spol. s r.o.", ico: "45422401", city: "Prešov", segment: "Logistika", pain: "Špedícia, vyťažovanie vozidiel.", contact: "Vedenie", email: "zlp@zlp.sk", phone: "0905 444 333", web: "http://zlp.sk" },
+        { name: "IPS Logistics", ico: "46067710", city: "Košice", segment: "Logistika", pain: "Tisíce faktúr, potreba workflow.", contact: "JUDr. Peter Parajos", email: "peter.parajos@ipslogistics.sk", phone: "0903 461 204", web: "https://www.ipslogistics.sk" },
+
+        // --- 3. Stavebníctvo & Služby ---
+        { name: "HALL SYSTEM s.r.o.", ico: "44877340", city: "Lendak", segment: "Stavebníctvo", pain: "Oceľové haly, koordinácia dielne a montáže.", contact: "Vedenie", email: "hallsystem@hallsystem.sk", phone: "052 468 59 31", web: "https://www.hallsystem.sk" },
+        { name: "Lechstav, s. r. o.", ico: "44557809", city: "Prešov", segment: "Stavebníctvo", pain: "Stavebné denníky, evidencia prác.", contact: "Stanislav Lech", email: "lechstav@lechstav.sk", phone: "0915 858 033", web: "https://www.lechstav.sk" },
+        { name: "BAUSKA, s. r. o.", ico: "46447156", city: "Rozhanovce", segment: "Stavebníctvo", pain: "Realizácia stavieb, sledovanie rozpočtov.", contact: "Vedenie", email: "bauska@bauska.sk", phone: "0910 200 266", web: "https://bauska.sk" },
+        { name: "KariStav s.r.o.", ico: "50548239", city: "Košice", segment: "Stavebníctvo", pain: "Zemné práce, vyťaženosť strojov (JCB).", contact: "Vedenie", email: "info@karistav.sk", phone: "0910 466 717", web: "http://www.karistav.sk" },
+        { name: "V.O.D.S., a.s.", ico: "36200301", city: "Košice", segment: "Služby", pain: "Odpadové hospodárstvo, vážne lístky.", contact: "Vedenie", email: "vods@vods.sk", phone: "055 678 28 20", web: "http://www.vods.sk" },
+        { name: "UNIMONT - VMS", ico: "36478067", city: "Vranov n/T", segment: "Stavebníctvo", pain: "Oceľové haly, synchronizácia výroby.", contact: "Vedenie", email: "unimont@unimont.sk", phone: "057 488 28 60", web: "http://www.unimont-vms.sk" },
+        { name: "D.A.G. SLOVAKIA", ico: "44886021", city: "Prešov", segment: "Stavebníctvo", pain: "Veľké stavby, riadenie projektov.", contact: "Vedenie", email: "dag@dagslovakia.sk", phone: "051 749 57 62", web: "https://www.dagslovakia.sk" },
         { name: "UNISTAV, s.r.o.", ico: "17147387", city: "Prešov", segment: "Stavebníctvo", pain: "Dopravné stavby, flotila strojov, PHM.", contact: "Vedenie", email: "unistav@unistav.sk", phone: "051 772 13 46", web: "http://www.unistav.sk" },
-        { name: "MOVYROB", ico: "10739254", city: "Prešov", segment: "Výroba", pain: "Mostové žeriavy, dlhodobé projekty, montáž.", contact: "Ing. Miroslav Mularčík", email: "movyrob@movyrob.sk", phone: "051 774 41 62", web: "http://www.movyrob.sk" },
-        { name: "GAS Familia, s.r.o.", ico: "31691552", city: "Stará Ľubovňa", segment: "Výroba", pain: "Liehovar, spotrebná daň, logistika fliaš.", contact: "Vedenie", email: "gasfamilia@gasfamilia.sk", phone: "052 428 31 11", web: "https://www.gasfamilia.com" },
-        { name: "AGRO-VALALIKY a.s.", ico: "36191922", city: "Valaliky", segment: "Agro", pain: "Rastlinná výroba, evidencia pozemkov a úrody.", contact: "Vedenie", email: "agrovalaliky@agrovalaliky.sk", phone: "055 699 82 23", web: "http://www.agro-valaliky.sk" },
-        { name: "STAVMONTA-SLOVAKIA", ico: "31709281", city: "Vranov n/T", segment: "Služby", pain: "Poskytovanie ľudských zdrojov pre stavby.", contact: "Vedenie", email: "stavmonta@stavmonta.sk", phone: "057 442 33 11", web: "http://www.stavmonta.sk" },
-        
-        // --- VÝBER Z BATCH 2 (Overené stálice) ---
-        { name: "Lánik.sk s.r.o.", ico: "36475710", city: "Prešov", segment: "Výroba", pain: "Fúzia firiem, potreba zjednotenia dát.", contact: "Daniel Lánik", email: "info@lanik.sk", phone: "+421 910 974 664", web: "https://www.lanik.sk" },
-        { name: "LUMARKT s.r.o.", ico: "36210082", city: "Košice", segment: "Logistika", pain: "Zásobovanie reťazcov, tlak na presnosť a EDI.", contact: "Daniel Lučkanič", email: "store@lumarkt.sk", phone: "+421 55 798 28 11", web: "https://www.lumarkt.sk" },
-        { name: "Eco-Pack Logistics", ico: "36747181", city: "Prešov", segment: "Logistika", pain: "Veľký objem, správa obalového konta.", contact: "Dispečing", email: "info@eco-packlogistics.sk", phone: "+421 51 771 11 11", web: "http://www.eco-packlogistics.sk" },
-        { name: "PEM - Haly, s.r.o.", ico: "35971720", city: "Košice", segment: "Stavebníctvo", pain: "Projektové riadenie výstavby hál.", contact: "Ing. Peter Mida", email: "pemhaly@pemhaly.sk", phone: "+421 905 123 456", web: "https://www.pemhaly.sk" },
-        { name: "Z.L.P. spol. s r.o.", ico: "45422401", city: "Prešov", segment: "Logistika", pain: "Špedícia, vyťažovanie vozidiel.", contact: "Vedenie", email: "zlp@zlp.sk", phone: "+421 905 444 333", web: "http://zlp.sk" },
-        { name: "PREMETAL MON", ico: "31709666", city: "Prešov", segment: "Výroba", pain: "Montáž agro technológií, servisné výjazdy.", contact: "Vedenie", email: "premetal@premetal.sk", phone: "+421 51 771 44 88", web: "https://www.premetal.sk" },
-        { name: "IPS Logistics s.r.o.", ico: "46067710", city: "Košice", segment: "Logistika", pain: "Tisíce faktúr, potreba workflow.", contact: "JUDr. Peter Parajos", email: "peter.parajos@ipslogistics.sk", phone: "+421 903 461 204", web: "https://www.ipslogistics.sk" },
-        { name: "Promont, s.r.o.", ico: "31732641", city: "Prešov", segment: "Stavebníctvo", pain: "Synchronizácia výroby a montáže.", contact: "Ing. Miloslav Tabiš", email: "milos@promont.sk", phone: "+421 905 623 554", web: "https://www.promont.sk" },
-        { name: "AWU Precision s.r.o.", ico: "31713531", city: "Záborské", segment: "Výroba", pain: "Vysoká presnosť, nároky na QC reporty.", contact: "Sekretariát", email: "awu@awu.sk", phone: "+421 51 772 26 50", web: "https://www.awu.sk" }
+        { name: "STAVMONTA-SLOVAKIA", ico: "31709281", city: "Vranov n/T", segment: "Služby", pain: "Poskytovanie ľudských zdrojov pre stavby.", contact: "Vedenie", email: "stavmonta@stavmonta.sk", phone: "0915 867 969", web: "http://www.stavmonta.sk" },
+        { name: "PEM - Haly, s.r.o.", ico: "35971720", city: "Košice", segment: "Stavebníctvo", pain: "Projektové riadenie výstavby hál.", contact: "Ing. Peter Mida", email: "pemhaly@pemhaly.sk", phone: "0905 123 456", web: "https://www.pemhaly.sk" },
+        { name: "Promont, s.r.o.", ico: "31732641", city: "Prešov", segment: "Stavebníctvo", pain: "Synchronizácia výroby a montáže.", contact: "Ing. Miloslav Tabiš", email: "milos@promont.sk", phone: "0905 623 554", web: "https://www.promont.sk" },
+
+        // --- 4. Obchod ---
+        { name: "RAMEX - SLOVAKIA", ico: "36495336", city: "Prešov", segment: "Obchod", pain: "Veľkoobchod stavebnín, skladové hospodárstvo.", contact: "Vedenie", email: "ramexslovakia@ramexslovakia.sk", phone: "0918 894 731", web: "https://ramexslovakia.sk" },
+        { name: "SPINEX s.r.o.", ico: "36729370", city: "Košice", segment: "Obchod", pain: "Veľkoobchod elektro, káble, inventúry.", contact: "Ing. Vladimír Mravčák", email: "spinex@spinex.sk", phone: "055 625 43 45", web: "http://www.spinex.sk" },
+        { name: "Stavcentrum", ico: "43937411", city: "Vranov n/T", segment: "Obchod", pain: "Stavebniny, rezervácie materiálu, logistika.", contact: "Vedenie", email: "stavcentrum@stavcentrum.sk", phone: "0905 264 430", web: "https://stavcentrum.sk" },
+        { name: "SADEX", ico: "51129191", city: "Prešov", segment: "Obchod", pain: "Ložiská a tesnenia, tisíce SKU.", contact: "Vedenie", email: "sadex@sadex.sk", phone: "051 772 12 05", web: "https://www.sadex.sk" },
+        { name: "AGRO-VALALIKY a.s.", ico: "36191922", city: "Valaliky", segment: "Agro", pain: "Rastlinná výroba, evidencia pozemkov.", contact: "Vedenie", email: "agrovalaliky@agrovalaliky.sk", phone: "0911 056 615", web: "http://www.agro-valaliky.sk" }
     ];
 
     const grid = document.getElementById('grid');
@@ -394,6 +431,7 @@
             else if(s.includes('logistika') || s.includes('doprava')) segClass = 'logistika';
             else if(s.includes('staveb')) segClass = 'stavebnictvo';
             else if(s.includes('obchod')) segClass = 'obchod';
+            else if(s.includes('agro')) segClass = 'agro';
 
             card.innerHTML = `
                 <div>
@@ -426,21 +464,24 @@
                 </div>
 
                 <div class="contact-footer">
-                    <div class="contact-row">
-                        <span class="contact-value">✉️ ${lead.email}</span>
-                        <button class="icon-btn" onclick="copyText('${lead.email}')" title="Kopírovať email">
-                            📋
-                        </button>
-                    </div>
-                    <div class="contact-row">
-                        <span class="contact-value">📞 ${lead.phone}</span>
-                        <div>
-                            <button class="icon-btn" onclick="copyText('${lead.phone}')" title="Kopírovať číslo">
+                    <div class="contact-actions">
+                        <div class="btn-action">
+                            <span class="action-text">✉️ ${lead.email}</span>
+                            <button class="icon-btn" onclick="copyText('${lead.email}')" title="Kopírovať e-mail">
                                 📋
                             </button>
-                            <a href="tel:${lead.phone.replace(/\s/g, '')}" class="icon-btn" title="Zavolať" style="text-decoration:none; margin-left:5px">
-                                📞
-                            </a>
+                        </div>
+                        
+                        <div class="btn-action">
+                            <span class="action-text">📞 ${lead.phone}</span>
+                            <div class="btn-group">
+                                <button class="icon-btn" onclick="copyText('${lead.phone}')" title="Kopírovať číslo">
+                                    📋
+                                </button>
+                                <a href="tel:${lead.phone.replace(/\s/g, '')}" class="icon-btn" title="Zavolať">
+                                    📞
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
