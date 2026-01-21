@@ -3,495 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulario Leads Dashboard 5.0 (S telefónnymi číslami)</title>
+    <title>Modulario Prezentácia</title>
     <style>
-        :root {
-            --primary: #0f172a;
-            --accent: #2563eb;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #334155;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --pain-bg: #fffbeb;
-            --pain-border: #f59e0b;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            padding-bottom: 60px;
-        }
-
-        /* Header */
-        header {
-            background: var(--card-bg);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .search-container {
-            flex: 1;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 12px 16px 12px 45px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: 0.3s;
-            background: #f1f5f9;
-        }
-
-        .search-container input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        .count-badge {
-            background: var(--primary);
-            color: #fff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Grid */
-        .container {
-            max-width: 1600px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 1.5rem;
-        }
-
-        /* Card */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: box-shadow 0.2s, border-color 0.2s;
-        }
-
-        .card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-color: #cbd5e1;
-        }
-
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-        }
-
-        .company-name {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1.3;
-            margin-right: 10px;
-        }
-
-        .web-btn {
-            background: #e0f2fe;
-            color: #0284c7;
-            text-decoration: none;
-            font-size: 0.75rem;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .web-btn:hover { background: #bae6fd; color: #0369a1; }
-
-        .meta-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .tag.vyroba { background: #dbeafe; color: #1e40af; }
-        .tag.logistika { background: #ffedd5; color: #9a3412; }
-        .tag.stavebnictvo { background: #dcfce7; color: #166534; }
-        .tag.obchod { background: #f3e8ff; color: #6b21a8; }
-        .tag.agro { background: #fef9c3; color: #854d0e; }
-        .tag.sluzby { background: #f1f5f9; color: #475569; }
-
-        .data-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            background: #f8fafc;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #f1f5f9;
-        }
-
-        .data-item span {
-            display: block;
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-        .data-item strong {
-            color: var(--text-main);
-            font-weight: 600;
-            user-select: all;
-        }
-
-        .pain-section {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #451a03;
-            background-color: var(--pain-bg);
-            border-left: 3px solid var(--pain-border);
-            padding: 10px;
-            margin-bottom: 1.5rem;
-            border-radius: 0 6px 6px 0;
-            font-style: italic;
-        }
-
-        .contact-footer {
-            margin-top: auto;
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-        }
-
-        .contact-person {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .contact-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .btn-action {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            border: 1px solid var(--border);
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: var(--text-main);
-            transition: 0.2s;
-        }
-
-        .btn-action:hover {
-            border-color: var(--accent);
-            background: #f8fafc;
-        }
-
-        .action-text {
-            user-select: all; /* Umožní ľahké označenie textu */
-            margin-right: 10px;
-            white-space: nowrap;
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
             overflow: hidden;
-            text-overflow: ellipsis;
+            background-color: #525659; /* Farba pozadia prehliadača PDF */
+            font-family: sans-serif;
+        }
+        
+        /* Kontajner pre PDF */
+        .pdf-container {
+            width: 100%;
+            height: 100vh; /* 100% výšky obrazovky */
         }
 
-        .btn-group {
-            display: flex;
-            gap: 5px;
-        }
-
-        .icon-btn {
-            background: #f1f5f9;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            width: 28px;
-            height: 28px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
-        .icon-btn:hover { background: var(--accent); color: white; }
-
-        /* Toast */
-        #toast {
-            visibility: hidden;
-            background-color: #1e293b;
-            color: #fff;
-            text-align: center;
-            border-radius: 8px;
-            padding: 12px 24px;
-            position: fixed;
-            z-index: 200;
-            bottom: 30px;
+        /* Tlačidlo pre mobily - poistka */
+        .mobile-fallback {
+            display: none; /* Na PC ho skryjeme */
+            position: absolute;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.95rem;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
         }
-        #toast.show {
-            visibility: visible;
-            animation: fadein 0.3s, fadeout 0.3s 2.7s;
+
+        /* Ak je obrazovka úzka (mobil), ukážeme tlačidlo */
+        @media (max-width: 768px) {
+            .mobile-fallback {
+                display: block;
+            }
         }
-        @keyframes fadein { from {bottom: 10px; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 10px; opacity: 0;} }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-        Modulario Leads
-    </div>
-    <div class="search-container">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Hľadať firmu, mesto, IČO...">
-    </div>
-    <div class="count-badge" id="countBadge">Načítavam...</div>
-</header>
+    <a href="Modulario_Kompletna_Prezentacia.pdf" class="mobile-fallback" target="_blank">
+        Otvoriť prezentáciu (PDF)
+    </a>
 
-<div class="container">
-    <div class="grid" id="grid"></div>
-</div>
-
-<div id="toast">✅ Údaj skopírovaný!</div>
-
-<script>
-    /* DATABÁZA - Teraz obsahuje aj pole PHONE pre každú firmu */
-    const leads = [
-        { name: "Lánik.sk s.r.o.", ico: "36475710", city: "Prešov", segment: "Výroba", turnover: "2,3 mil. €", pain: "Fúzia firiem, potreba zjednotenia dát.", contact: "Daniel Lánik", email: "info@lanik.sk", phone: "+421 910 974 664", web: "https://www.lanik.sk" },
-        { name: "LUMARKT s.r.o.", ico: "36210082", city: "Košice", segment: "Logistika", turnover: "8,5 mil. €", pain: "Zásobovanie reťazcov, tlak na presnosť a EDI.", contact: "Daniel Lučkanič", email: "store@lumarkt.sk", phone: "+421 55 798 28 11", web: "https://www.lumarkt.sk" },
-        { name: "Eco-Pack Logistics", ico: "36747181", city: "Prešov", segment: "Logistika", turnover: "5,2 mil. €", pain: "Veľký objem, správa obalového konta.", contact: "Dispečing", email: "info@eco-packlogistics.sk", phone: "+421 51 771 11 11", web: "http://www.eco-packlogistics.sk" },
-        { name: "PEM - Haly, s.r.o.", ico: "35971720", city: "Košice", segment: "Stavebníctvo", turnover: "1,5 mil. €", pain: "Projektové riadenie výstavby hál.", contact: "Ing. Peter Mida", email: "pemhaly@pemhaly.sk", phone: "+421 905 123 456", web: "https://www.pemhaly.sk" },
-        { name: "Z.L.P. spol. s r.o.", ico: "45422401", city: "Prešov", segment: "Logistika", turnover: "2,0 mil. €", pain: "Špedícia, vyťažovanie vozidiel.", contact: "Vedenie", email: "zlp@zlp.sk", phone: "+421 905 444 333", web: "http://zlp.sk" },
-        { name: "PREMETAL MON", ico: "31709666", city: "Prešov", segment: "Výroba", turnover: "3,6 mil. €", pain: "Montáž agro technológií, servisné výjazdy.", contact: "Vedenie", email: "premetal@premetal.sk", phone: "+421 51 771 44 88", web: "https://www.premetal.sk" },
-        { name: "IPS Logistics s.r.o.", ico: "46067710", city: "Košice", segment: "Logistika", turnover: "7,4 mil. €", pain: "Tisíce faktúr, potreba workflow.", contact: "JUDr. Peter Parajos", email: "peter.parajos@ipslogistics.sk", phone: "+421 903 461 204", web: "https://www.ipslogistics.sk" },
-        { name: "Promont, s.r.o.", ico: "31732641", city: "Prešov", segment: "Stavebníctvo", turnover: "4,2 mil. €", pain: "Synchronizácia výroby a montáže.", contact: "Ing. Miloslav Tabiš", email: "milos@promont.sk", phone: "+421 905 623 554", web: "https://www.promont.sk" },
-        { name: "AWU Precision s.r.o.", ico: "31713531", city: "Záborské", segment: "Výroba", turnover: "9,2 mil. €", pain: "Vysoká presnosť, nároky na QC reporty.", contact: "Sekretariát", email: "awu@awu.sk", phone: "+421 51 772 26 50", web: "https://www.awu.sk" },
-        { name: "EKOPRIM, s.r.o.", ico: "31710115", city: "Prešov", segment: "Stavebníctvo", turnover: "2,5 mil. €", pain: "Inžinierske siete, mechanizácia.", contact: "Ing. Ľubomír Duplák", email: "ekoprim@ekoprim.sk", phone: "+421 51 771 14 02", web: "https://www.ekoprim.sk" },
-        { name: "KOMODEX s.r.o.", ico: "45670609", city: "Prešov", segment: "Obchod/Agro", turnover: "2,8 mil. €", pain: "Obchod s agrokomoditami, zmluvy.", contact: "Ing. Martin Lenďák", email: "komodex@komodex.sk", phone: "+421 905 789 123", web: "https://www.komodex.sk" },
-        { name: "ELZIN, spol. s r.o.", ico: "36445151", city: "Prešov", segment: "Výroba", turnover: "1,4 mil. €", pain: "Galvanizovňa - sledovanie zákaziek.", contact: "Ing. Jozef Štoffa", email: "elzin@elzin.sk", phone: "+421 905 352 949", web: "https://www.elzin.sk" },
-        { name: "SLER, s. r. o.", ico: "36453881", city: "Prešov", segment: "Výroba", turnover: "1,3 mil. €", pain: "CNC obrábanie, kalkulácie nákladov.", contact: "Rastislav Ščavnický", email: "sler@sler.sk", phone: "+421 905 515 922", web: "https://www.sler.sk" },
-        { name: "HORTI s.r.o.", ico: "36200613", city: "Košice", segment: "Obchod", turnover: "6,5 mil. €", pain: "Veľkoobchod ovocie/zelenina, obrátkovosť.", contact: "Vedenie", email: "horti@horti.sk", phone: "+421 55 678 12 12", web: "https://www.horti.sk" },
-        { name: "GVP, spol. s r.o.", ico: "31673325", city: "Humenné", segment: "Obchod", turnover: "9,0 mil. €", pain: "Veľkoobchod potraviny, logistika rozvozu.", contact: "Vedenie", email: "gvphe@gvphe.sk", phone: "+421 57 775 43 10", web: "http://www.gvphe.sk" },
-        { name: "Baubuild s.r.o.", ico: "50865760", city: "Košice", segment: "Stavebníctvo", turnover: "1,0 mil. €", pain: "Rekonštrukcie a stavby, koordinácia.", contact: "Vedenie", email: "info@baubuild.sk", phone: "+421 948 112 233", web: "https://baubuild.sk" },
-        { name: "SOLITÉRA, s.r.o.", ico: "36577881", city: "Smižany", segment: "Služby", turnover: "1,6 mil. €", pain: "Developer, klientske zmeny.", contact: "Vedenie", email: "info@solitera.sk", phone: "0903 945 704", web: "https://www.solitera.sk" },
-        { name: "SANY STAV, s.r.o.", ico: "46830308", city: "Prešov", segment: "Stavebníctvo", turnover: "3,1 mil. €", pain: "Stavebná firma, evidencia ľudí.", contact: "Vedenie", email: "info@sanystav.sk", phone: "+421 915 961 032", web: "https://www.sanystav.sk" },
-        { name: "GENERAL s.r.o.", ico: "36465463", city: "Prešov", segment: "Stavebníctvo", turnover: "4,8 mil. €", pain: "Generálny dodávateľ, subdodávatelia.", contact: "Ing. Peter Jankulák", email: "general@generalsro.sk", phone: "051 771 23 45", web: "https://www.generalsro.sk" },
-        { name: "ISCC s.r.o.", ico: "44264666", city: "Košice", segment: "Logistika", turnover: "2,5 mil. €", pain: "Špedícia, ISO certifikácie.", contact: "Ing. Juraj Štanga", email: "stanga@iscc.sk", phone: "+421 949 580 516", web: "https://www.iscc.sk" },
-        { name: "HEDAN PLUS", ico: "44366914", city: "Trebišov", segment: "Výroba", turnover: "1,8 mil. €", pain: "Výroba cestovín, šarže, expirácie.", contact: "Ing. Robert Dohaňoš", email: "office@hedanplus.sk", phone: "056 672 55 10", web: "https://www.hedanplus.sk" },
-        { name: "AutoComLine", ico: "36737528", city: "Michalovce", segment: "Logistika", turnover: "2,1 mil. €", pain: "Vlastná flotila, servisné intervaly.", contact: "Lenka Czetoová", email: "autocomline@gmail.com", phone: "+421 915 991 535", web: "https://www.autocomline.sk" },
-        { name: "STI, spol. s r.o.", ico: "31697226", city: "Krompachy", segment: "Stavebníctvo", turnover: "3,5 mil. €", pain: "Špeciálne zakladanie stavieb.", contact: "Vedenie", email: "sti@sti.sk", phone: "053/445 10 30", web: "https://www.sti.sk" },
-        { name: "Slowaker", ico: "36589332", city: "Trebišov", segment: "Logistika", turnover: "2,2 mil. €", pain: "Medzinárodná špedícia, CRM.", contact: "Dispečing", email: "info@slowaker.com", phone: "0948 139 610", web: "https://www.slowaker.com" },
-        { name: "Novicom", ico: "36594247", city: "Slivník", segment: "Stavebníctvo", turnover: "1,9 mil. €", pain: "Prenájom strojov, evidencia motohodín.", contact: "Ing. Radovan Novák", email: "novicom@novicom.sk", phone: "056/66 85 305", web: "https://www.novicom.sk" },
-        { name: "Laminum SK", ico: "36592236", city: "Košice", segment: "Výroba", turnover: "1,5 mil. €", pain: "Laminácia profilov, tisíce variantov.", contact: "Roland Fedák", email: "fedak@laminum.sk", phone: "+421 918 697 783", web: "https://www.laminum.sk" },
-        { name: "ČECH, s.r.o.", ico: "31720881", city: "Prešov", segment: "Stavebníctvo", turnover: "1,8 mil. €", pain: "Pamiatková obnova, špecifické materiály.", contact: "Ing. Ľubomír Čech", email: "cech@cechsro.sk", phone: "+421 51 77 11 893", web: "https://www.cechsro.sk" },
-        { name: "Domont", ico: "36495346", city: "Prešov", segment: "Stavebníctvo", turnover: "0,6 mil. €", pain: "Montážne práce, plánovanie.", contact: "Konateľ", email: "domont@domont.sk", phone: "0905 966 619", web: "https://www.domont.sk" },
-        { name: "AGROBAZÁR", ico: "33950466", city: "V. Raškovce", segment: "Agro/Obchod", turnover: "1,0 mil. €", pain: "Predaj a servis strojov, diely.", contact: "Benjamín Popély", email: "agrobazar@agrobazar.sk", phone: "056 649 22 11", web: "http://www.agrobazar.sk" },
-        { name: "Sanas a.s.", ico: "36462740", city: "Sabinov", segment: "Výroba", turnover: "12,5 mil. €", pain: "Veľkovýroba nábytku, reklamácie.", contact: "Ing. Jaroslav Nemec", email: "jaroslav.nemec@sanas.sk", phone: "+421 915 753 050", web: "https://www.sanas.sk" },
-        { name: "AGROTRADE GROUP", ico: "31682253", city: "Rožňava", segment: "Agro", turnover: "8,0 mil. €", pain: "Predaj techniky, servisná agenda.", contact: "Pobočka", email: "roznava@agrotradegroup.sk", phone: "058 732 11 11", web: "https://agrotradegroup.sk" },
-        { name: "GMT projekt", ico: "36484971", city: "Bardejov", segment: "Stavebníctvo", turnover: "1,0 mil. €", pain: "Projekcia a realizácia, stavebný denník.", contact: "Ing. arch. Gmitter", email: "gmtprojekt@gmtprojekt.sk", phone: "0905 123 789", web: "https://gmtprojekt.sk" },
-        { name: "K-MK-Stav", ico: "53214030", city: "Sečovce", segment: "Stavebníctvo", turnover: "2,5 mil. €", pain: "Stavebná činnosť, požičovňa lešenia.", contact: "Vedenie", email: "kmkstav@kmkstav.sk", phone: "0905 555 666", web: "https://k-mk-stav.wbl.sk" },
-        { name: "M.A.D.D. FRUIT", ico: "36585167", city: "Michalovce", segment: "Obchod", turnover: "3,5 mil. €", pain: "Dovoz ovocia, colné deklarácie.", contact: "Vedenie", email: "info@maddfruit.sk", phone: "056 644 11 22", web: "http://www.maddfruit.sk" },
-        { name: "FISS, s.r.o.", ico: "46699597", city: "Spišská Nová Ves", segment: "Stavebníctvo", turnover: "1,2 mil. €", pain: "Domy na kľúč, klientske zmeny.", contact: "Ing. Andrej Ivančo", email: "info@fiss.sk", phone: "0907 123 456", web: "https://fiss.sk" },
-        { name: "MK TRANS Prešov", ico: "36491952", city: "Prešov", segment: "Logistika", turnover: "0,9 mil. €", pain: "Doprava + účtovníctvo, veľa papierov.", contact: "Viera Komárová", email: "mktrans@mktrans.sk", phone: "0911 277 491", web: "https://www.mktrans.sk" },
-        { name: "METAL COMPLEX", ico: "36504289", city: "Prešov", segment: "Výroba", turnover: "1,1 mil. €", pain: "Výroba oceľových konštrukcií.", contact: "Vedenie", email: "metalcomplex@metalcomplex.sk", phone: "051 77 22 333", web: "http://www.metalcomplex.sk" },
-        { name: "GIM - S s.r.o.", ico: "36490662", city: "Prešov", segment: "Výroba", turnover: "1,0 mil. €", pain: "Presná strojárska výroba.", contact: "Vedenie", email: "gims@gims.sk", phone: "051 773 11 11", web: "http://www.gims.sk" },
-        { name: "RAIS Slovakia", ico: "36502219", city: "Petrovany", segment: "Výroba", turnover: "1,2 mil. €", pain: "Prototypová výroba, zmeny.", contact: "Vedenie", email: "rais@rais.sk", phone: "051 778 12 12", web: "https://www.rais.sk" },
-        { name: "Kovo Ľubotice", ico: "36454763", city: "Ľubotice", segment: "Výroba", turnover: "1,1 mil. €", pain: "Kovoobrábanie, evidencia materiálu.", contact: "Vedenie", email: "kovolubotice@kovolubotice.sk", phone: "051 776 11 11", web: "http://www.kovolubotice.sk" },
-        { name: "ZANTEO STAV", ico: "47453303", city: "Prešov", segment: "Stavebníctvo", turnover: "1,1 mil. €", pain: "Stavby domov, viacpráce.", contact: "Marek Seman", email: "info@stavebnepracepresov.sk", phone: "+421 944 116 353", web: "https://www.stavebnepracepresov.sk" },
-        { name: "ENTITA live", ico: "36488062", city: "Bardejov", segment: "Stavebníctvo", turnover: "0,7 mil. €", pain: "Projektová a inžinierska činnosť.", contact: "Vlasta Kočarová", email: "entita@entita.as", phone: "054 472 11 11", web: "https://www.entita.as" },
-        { name: "SVIDMEX +", ico: "36582567", city: "Košice", segment: "Stavebníctvo", turnover: "N/A", pain: "Strechy a zatepľovanie.", contact: "Vedenie", email: "svidmex@svidmex.sk", phone: "055 678 12 34", web: "http://www.zateplovanie-kosice.sk" },
-        { name: "A&J TREND", ico: "46990631", city: "Košice", segment: "Stavebníctvo", turnover: "0,2 mil. €", pain: "Menšia firma, rekonštrukcie.", contact: "Vedenie", email: "ajtrend@ajtrend.sk", phone: "0905 111 222", web: "https://www.aj-trend.sk" },
-        { name: "COSA s.r.o.", ico: "36453008", city: "Dlhé n/C", segment: "Stavebníctvo", turnover: "1,5 mil. €", pain: "Demolácie, evidencia odpadov.", contact: "Ján Bončík", email: "cosa@cosa.sk", phone: "0905 444 777", web: "http://www.cosa.sk" },
-        { name: "MAJO-STAV", ico: "45648867", city: "Košice", segment: "Stavebníctvo", turnover: "3,5 mil. €", pain: "Rodinná firma, riadenie partií.", contact: "Jozef Marenčin", email: "majostav@majostav.sk", phone: "+421 905 123 456", web: "https://majo-stav.sk" },
-        { name: "VERVA s.r.o.", ico: "31681281", city: "Košice", segment: "Stavebníctvo", turnover: "2,0 mil. €", pain: "Výstavba na kľúč od r. 1991.", contact: "Vedenie", email: "info@vervasro.sk", phone: "055 622 11 11", web: "https://www.vervasro.sk" },
-        { name: "Mäso ZEMPLÍN", ico: "36205917", city: "Michalovce", segment: "Výroba", turnover: "25 mil. €", pain: "Výroba mäsa, vlastný chov.", contact: "Sekretariát", email: "masozemplin@masozemplin.sk", phone: "056 644 11 11", web: "http://www.masozemplin.sk" },
-        { name: "TIREX", ico: "31709402", city: "Košice", segment: "Logistika", turnover: "5,5 mil. €", pain: "Špedícia, medzinárodná preprava.", contact: "Vedenie", email: "tirex@tirex.sk", phone: "055 678 11 22", web: "http://www.tirex.sk" },
-        { name: "HASMA, s.r.o.", ico: "31674402", city: "Krompachy", segment: "Výroba", turnover: "4,0 mil. €", pain: "Výroba rozvádzačov.", contact: "Vedenie", email: "hasma@hasma.sk", phone: "053 417 11 11", web: "https://www.hasma.sk" },
-        { name: "Impol, s.r.o.", ico: "36467385", city: "Ľubotice", segment: "Obchod", turnover: "3,0 mil. €", pain: "Distribúcia potravín, logistika.", contact: "Vedenie", email: "impol@impol.sk", phone: "051 771 22 33", web: "http://www.impol.sk" },
-        { name: "CWT Metal", ico: "36570649", city: "Brzotín", segment: "Výroba", turnover: "1,5 mil. €", pain: "Zákazková strojárska výroba.", contact: "Vedenie", email: "info@cwtmetal.sk", phone: "058 732 22 33", web: "http://www.cwtmetal.sk" },
-        { name: "ZANZI s.r.o.", ico: "36572579", city: "Haniska", segment: "Výroba", turnover: "2,8 mil. €", pain: "Výroba plechov, sklad.", contact: "Vedenie", email: "zanzi@zanzi.sk", phone: "055 693 01 11", web: "http://www.zanzi.sk" },
-        { name: "Hydina Furajtár", ico: "46864199", city: "Margecany", segment: "Agro/Výroba", turnover: "1,2 mil. €", pain: "Chov hydiny, krmivá.", contact: "Vedenie", email: "hydinafurajtar@gmail.com", phone: "0905 888 999", web: "https://hydinafurajtar.sk" },
-        { name: "A.G.E.S. s.r.o.", ico: "31688324", city: "Olcnava", segment: "Výroba", turnover: "1,1 mil. €", pain: "Strojárska výroba dielov.", contact: "Vedenie", email: "ages@ages.sk", phone: "053 449 11 22", web: "http://ages.sk" }
-    ];
-
-    const grid = document.getElementById('grid');
-    const searchInput = document.getElementById('searchInput');
-    const countBadge = document.getElementById('countBadge');
-    const toast = document.getElementById('toast');
-
-    function renderLeads(filter = "") {
-        grid.innerHTML = "";
-        const lowerFilter = filter.toLowerCase();
-        
-        const filtered = leads.filter(l => 
-            l.name.toLowerCase().includes(lowerFilter) ||
-            l.city.toLowerCase().includes(lowerFilter) ||
-            l.segment.toLowerCase().includes(lowerFilter) ||
-            l.ico.includes(lowerFilter)
-        );
-
-        countBadge.textContent = `${filtered.length} firiem`;
-
-        filtered.forEach(lead => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            
-            // Určenie farby tagu
-            let segClass = 'sluzby';
-            const s = lead.segment.toLowerCase();
-            if(s.includes('výroba')) segClass = 'vyroba';
-            else if(s.includes('logistika') || s.includes('doprava')) segClass = 'logistika';
-            else if(s.includes('staveb')) segClass = 'stavebnictvo';
-            else if(s.includes('obchod')) segClass = 'obchod';
-            else if(s.includes('agro')) segClass = 'agro';
-
-            card.innerHTML = `
-                <div>
-                    <div class="card-top">
-                        <div class="company-name" title="Názov firmy">${lead.name}</div>
-                        <a href="${lead.web}" target="_blank" class="web-btn" title="Otvoriť v novom okne">
-                            🌐 Web
-                        </a>
-                    </div>
-                    
-                    <div class="meta-row">
-                        <span class="tag ${segClass}">${lead.segment}</span>
-                        <span>📍 ${lead.city}</span>
-                    </div>
-
-                    <div class="data-grid">
-                        <div class="data-item">
-                            <span>Obrat</span>
-                            <strong>${lead.turnover}</strong>
-                        </div>
-                        <div class="data-item">
-                            <span>IČO</span>
-                            <strong>${lead.ico}</strong>
-                        </div>
-                    </div>
-
-                    <div class="pain-section">
-                        "${lead.pain}"
-                    </div>
-                </div>
-
-                <div class="contact-footer">
-                    <div class="contact-person">
-                        👤 ${lead.contact}
-                    </div>
-                    
-                    <div class="contact-actions">
-                        <div class="btn-action">
-                            <span class="action-text">✉️ ${lead.email}</span>
-                            <button class="icon-btn" onclick="copyText('${lead.email}')" title="Kopírovať e-mail">
-                                📋
-                            </button>
-                        </div>
-                        
-                        <div class="btn-action">
-                            <span class="action-text">📞 ${lead.phone}</span>
-                            <div class="btn-group">
-                                <button class="icon-btn" onclick="copyText('${lead.phone}')" title="Kopírovať číslo">
-                                    📋
-                                </button>
-                                <a href="tel:${lead.phone.replace(/\s/g, '')}" class="icon-btn" title="Zavolať">
-                                    📞
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    // Funkcia na kopírovanie textu do schránky
-    window.copyText = function(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            toast.className = "show";
-            setTimeout(() => toast.className = "", 3000);
-        });
-    }
-
-    searchInput.addEventListener('input', (e) => renderLeads(e.target.value));
-
-    // Inicializácia
-    renderLeads();
-
-</script>
+    <object class="pdf-container" data="Modulario_Kompletna_Prezentacia.pdf" type="application/pdf">
+        <div style="padding: 20px; text-align: center; color: white;">
+            Váš prehliadač nepodporuje zobrazenie PDF. 
+            <br><br>
+            <a href="Modulario_Kompletna_Prezentacia.pdf" style="color: #fff; text-decoration: underline;">
+                Kliknite sem pre stiahnutie prezentácie.
+            </a>
+        </div>
+    </object>
 
 </body>
 </html>
