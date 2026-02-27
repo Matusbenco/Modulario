@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stratégia - Obchodný Riaditeľ AMCEF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;600;800;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Originálne farby extrahované z vášho kódu a obrázkov */
+            --color-primary: #1a1a1a;
+            --color-text: #3d3d3d;
+            --color-yellow: #EBB22D;
+            --color-blue: #3BC4EF;
+            --color-green: #2AB67D;
+            --color-bg: #F5F5F5;
+            --color-white: #FFFFFF;
+            
+            /* Tiene a prechody z Modularia */
+            --shadow-card: 0 8px 30px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+            --gradient-modulario: linear-gradient(300deg, #EBB22D 0%, #3BC4EF 100%);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: 'Heebo', sans-serif;
+            background-color: #ffffff;
+            color: var(--color-text);
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        body::-webkit-scrollbar { display: none; }
+
+.fixed-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -2;
+            background-image: url("https://www.modulario.com/wp-content/uploads/2025/05/Group-8638.webp");
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 1; 
+            overflow: hidden;
+            animation: bgZoom 20s ease-in-out infinite alternate;
+        }
+        
+        @keyframes bgZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+/* Plávajúce svetelné efekty pre hĺbku */
+.blob {
+    position: absolute; 
+    border-radius: 50%; 
+    filter: blur(120px); /* Extrémne rozmazanie pre jemný glow */
+    opacity: 0.4;
+    z-index: -1; 
+    animation: moveBlobs 25s infinite alternate ease-in-out;
+}
+
+.blob-yellow { 
+    width: 60vw; height: 60vw; 
+    background: #EBB22D; 
+    top: -20%; left: -10%; 
+}
+
+.blob-blue { 
+    width: 50vw; height: 50vw; 
+    background: #3BC4EF; 
+    bottom: -10%; right: -10%; 
+    animation-delay: -12s; 
+}
+
+@keyframes moveBlobs {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10vw, 5vh) scale(1.1); }
+}
+
+        .logo-container {
+            position: fixed; top: 40px; left: 50px; display: flex; align-items: center; gap: 4px; z-index: 100;
+            animation: logoSlideIn 0.8s ease-out;
+        }
+
+        .logo { 
+            max-width: 480px; /* increased 20% */
+            width: clamp(144px, 18vw, 480px); /* dynamic resizing with 20% bump */
+            transition: filter 0.3s ease, width 0.3s ease;
+            height: auto;
+            /* subtle constant shadow to make white text pop on light backgrounds */
+            filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
+        }
+        
+        .logo:hover {
+            filter: drop-shadow(0 4px 12px rgba(59, 196, 239, 0.4));
+        }
+        
+        /* logo text container removed since text is no longer desired
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Gabarito', sans-serif;
+            color: #000;
+            opacity: 0.8;
+            transition: opacity 0.3s, text-shadow 0.3s, transform 0.3s;
+            white-space: nowrap;
+            margin-left: 4px;
+        }
+        */
+
+        /* logo text styles no longer needed
+        .logo-main {
+            font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+            line-height: 1;
+        }
+
+        .logo-sub {
+            font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+            line-height: 1;
+            opacity: 0.6;
+            margin-top: 2px;
+        }
+        */
+
+        .logo-container:hover .logo-text {
+            opacity: 1;
+            text-shadow: 0 0 8px var(--color-blue);
+            transform: scale(1.1);
+        }
+        
+        @keyframes logoSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-dots {
+            position: fixed; right: 50px; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 16px; z-index: 100;
+        }
+
+        .dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: rgba(46, 46, 46, 0.15); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dot:hover {
+            background: rgba(59, 196, 239, 0.6);
+            transform: scale(1.4) !important;
+        }
+
+        .slide {
+            height: 100vh; width: 100vw; scroll-snap-align: start;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-slide { 
+            flex-direction: column; 
+            text-align: center; 
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%);
+        }
+
+        h1, h2, h3 { 
+            font-family: 'Gabarito', sans-serif; 
+            margin: 0; 
+            color: var(--color-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-title {
+            font-size: 5.5rem; font-weight: 900; line-height: 1.05;
+            margin-bottom: 30px; letter-spacing: -2px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+       .efektTextu {
+    /* Správny smer od Modulario žltej po modrú */
+    background: linear-gradient(135deg, #EBB22D 0%, #3BC4EF 50%, #2AB67D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    font-weight: 900;
+    position: relative;
+    animation: gradientShift 3s ease infinite;
+}
+
+        .hero-subtitle { 
+            font-size: 1.4rem; font-weight: 400; max-width: 700px; color: var(--color-text); 
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        .author-text {
+            font-style: italic;
+            color: var(--color-primary);
+            opacity: 0.7;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .scroll-indicator {
+            position: absolute; bottom: 50px; font-size: 1rem;
+            color: var(--color-primary); font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2.5px; animation: bounce 2.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* KARTY V ŠTÝLE MODULARIO s 3D Tilt prípravou */
+        .card-container { 
+            width: 95%; 
+            max-width: 1000px; 
+            z-index: 10; 
+            perspective: 1200px;
+            animation: containerFadeIn 0.8s ease-out;
+        }
+        
+        @keyframes containerFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+    /* Priehľadná biela */
+    background: rgba(255, 255, 255, 0.75);
+    /* Efekt rozmazania pod kartou (sklo) */
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    /* Jemný biely okraj typický pre glassmorphism */
+    border: 1.5px solid rgba(235, 178, 45, 0.2);
+    border-radius: 28px;
+    padding: 65px 75px;
+    position: relative;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    transform-style: preserve-3d; 
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(235, 178, 45, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .card:hover { 
+            box-shadow: 0 32px 80px rgba(59, 196, 239, 0.25);
+            border-color: rgba(59, 196, 239, 0.5);
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .bg-number {
+            position: absolute; top: 20px; right: 40px;
+            font-family: 'Gabarito', sans-serif;
+            font-size: 10rem; font-weight: 900; line-height: 1;
+            background: var(--gradient-modulario);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 0; pointer-events: none;
+            transform: translateZ(-10px);
+            opacity: 0.1;
+        }
+
+        .card-header {
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 2;
+            transform: translateZ(30px);
+            animation: slideInLeft 0.6s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px) translateZ(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) translateZ(30px);
+            }
+        }
+
+        .card-title { 
+            font-size: 2.8rem; font-weight: 900; 
+            color: var(--color-primary);
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Zamknutá karta (Overlay) */
+.card-overlay {
+    position: absolute; inset: 0; 
+    /* Ešte o niečo viac mliečne sklo na zakrytie */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px); 
+    border-radius: 28px;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 20; cursor: pointer; transition: all 0.5s ease;
+}
+    
+
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--color-yellow) 0%, rgba(235, 178, 45, 0.8) 100%);
+            color: var(--color-white);
+            font-family: 'Gabarito', sans-serif;
+            padding: 16px 40px;
+            font-size: 20px;
+            font-weight: 900;
+            border-radius: 35px;
+            border: 3px solid var(--color-yellow);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            box-shadow: 0 6px 25px rgba(235, 178, 45, 0.4);
+            text-align: center;
+            min-width: 240px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 3;
+            background-size: 200% 200%;
+        }
+
+        .card-overlay:hover .reveal-btn {
+            background: linear-gradient(135deg, rgba(235, 178, 45, 0.1) 0%, rgba(235, 178, 45, 0) 100%);
+            color: var(--color-yellow);
+            transform: scale(1.12) translateY(-2px);
+            box-shadow: 0 10px 40px rgba(235, 178, 45, 0.5);
+            border-color: var(--color-yellow);
+            letter-spacing: 2px;
+        }
+
+        .card-content {
+            opacity: 0;
+            transform: translateY(20px) translateZ(20px);
+            transition: all 0.6s ease 0.15s;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* STAV PO KLIKNUTÍ */
+        .card.revealed { 
+            border: 1.5px solid rgba(59, 196, 239, 0.5);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .card.revealed .card-overlay { opacity: 0; visibility: hidden; pointer-events: none; }
+        .card.revealed .card-content { opacity: 1; transform: translateY(0) translateZ(20px); animation: contentReveal 0.6s ease 0.15s both; }
+        
+        @keyframes contentReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px) translateZ(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) translateZ(20px);
+            }
+        }
+
+        /* Zoznamy */
+        ul { 
+            list-style: none; padding: 0; margin: 0; 
+            display: grid; gap: 28px; 
+        }
+        li { 
+            font-size: 18px; 
+            line-height: 1.8; 
+            padding-left: 40px; 
+            position: relative;
+            color: var(--color-text);
+            animation: listItemFade 0.6s ease backwards;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: default;
+        }
+        
+        li:hover {
+            color: var(--color-primary);
+            transform: translateX(8px);
+        }
+        
+        li:hover::before {
+            transform: scale(1.3);
+            box-shadow: 0 4px 15px rgba(235, 178, 45, 0.5);
+        }
+        
+        li:nth-child(1) { animation-delay: 0.2s; }
+        li:nth-child(2) { animation-delay: 0.35s; }
+        li:nth-child(3) { animation-delay: 0.5s; }
+        li:nth-child(4) { animation-delay: 0.65s; }
+        li:nth-child(5) { animation-delay: 0.8s; }
+        
+        @keyframes listItemFade {
+            from {
+                opacity: 0;
+                transform: translateX(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        li::before {
+            content: ''; 
+            position: absolute; left: 0; top: 12px;
+            width: 14px; height: 14px; 
+            background: var(--gradient-modulario); 
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(235, 178, 45, 0.3);
+        }
+
+        strong { 
+            color: var(--color-primary); 
+            font-weight: 800; 
+            font-size: 20px; 
+            display: block; 
+            margin-bottom: 6px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    
+    <div class="logo-container">
+        <img src="https://www.modulario.com/wp-content/uploads/2024/08/logo-modulario_4x.webp" alt="" title="" class="logo" onerror="this.style.display='none'">
+        <!-- text next to logo removed per request -->
+    </div>
+
+    <div class="nav-dots">
+        <div class="dot" style="background: var(--color-blue); transform: scale(1.3);"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <section class="slide hero-slide">
+        <h1 class="hero-title">Strategický rozvoj <span class="efektTextu">obchodu</span></h1>
+<p class="hero-subtitle">Od optimalizácie interných procesov až po dosahovanie predvídateľných výsledkov.</p>
+<p class="hero-subtitle author-text">Prezentácia: Matúš Benčo</p>
+        <div class="scroll-indicator">Scrollujte nadol ↓</div>
+    </section>
+
+    <section class="slide">
+        <div class="card-container">
+            <div class="card" onmouseenter="startTilt(this)" onmouseleave="stopTilt(this)" onmousemove="tilt(event, this)">
+                <div class="bg-number">01</div>
+                
+                <div class="card-overlay" onclick="decodeAndReveal(this.parentElement)">
+                    <div class="reveal-btn" data-target="ZOBRAZIŤ DETAIL">ZOBRAZIŤ DETAIL</div>
+                </div>
+
+                <div class="card-header">
+                    <h2 class="card-title">Prečo som ten správny človek?</h2>
+                </div>
+                
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Dobré poznanie firmy a procesov</strong>Firma potrebuje napredovať okamžite.</li>
+                        <li><strong>Skúsenosti</strong>S obchodom, marketingom, vedením tímu a technologický nadhľad</li>
+                        <li><strong>Okamžitý štart a Cashflow</strong>Od prvého dňa riešim nastavenie systému a stratégie tak aby do firmy prišiel stabilný cashflow.</li>
+                        <li><strong>Jasná Vízia</strong>Verím, že Modulario vie byť TOP technologické riešenie na SK/CZ trhu.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scrollujte nadol ↓</div>
+    </section>
+
+    <section class="slide">
+        <div class="card-container">
+            <div class="card" onmouseenter="startTilt(this)" onmouseleave="stopTilt(this)" onmousemove="tilt(event, this)">
+                <div class="bg-number">02</div>
+                <div class="card-overlay" onclick="decodeAndReveal(this.parentElement, event)">
+                    <div class="reveal-btn" data-target="ZOBRAZIŤ DETAIL">ZOBRAZIŤ DETAIL</div>
+                </div>
+                <div class="card-header">
+                    <h2 class="card-title">Upratanie dát a zjednotenie tímu</h2>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Audit projektov</strong>Na prvých meetingoch odkryjeme všetky dokončené aj otvorené projekty. Potrebné čo najskôr dotiahnúť "staré projekty".</li>
+                        <li><strong>Stratégia Upsellu</strong>Každý odovzdaný projekt spoločne preberieme a nastavíme stratégiu pre spokojnosť klienta a okamžitý up-sell.</li>
+                        <li><strong>Systém pre Leady</strong>Spočítame a roztriedime všetky aktuálne leady. Zameriame sa okamžite na tie, ktoré majú najväčšˇi potenciál.</li>
+                        <li><strong>Vzdelávanie a Know-how</strong>Pravidelné tréningy zručností a zdieľanie informácií, aby v tíme nezostal žiadny slabý článok.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scrollujte nadol ↓</div>
+    </section>
+
+    <section class="slide">
+        <div class="card-container">
+            <div class="card" onmouseenter="startTilt(this)" onmouseleave="stopTilt(this)" onmousemove="tilt(event, this)">
+                <div class="bg-number">03</div>
+                <div class="card-overlay" onclick="decodeAndReveal(this.parentElement, event)">
+                    <div class="reveal-btn" data-target="ZOBRAZIŤ DETAIL">ZOBRAZIŤ DETAIL</div>
+                </div>
+                <div class="card-header">
+                    <h2 class="card-title">Potrebujeme viac predajov</h2>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Malé projekty = Rýchle peniaze</strong>Predaj základných funkcií Modularia s nižším SLA. Rýchle dodanie, okamžitý zisk a obrovský potenciál predaja do budúcna.</li>
+                        <li><strong>Cielená segmentácia</strong>Koniec strieľaniu naslepo. Každý mesiac hlboko spracujeme a zameriame sa len na jeden špecifický segment trhu.</li>
+                        <li><strong>Argumenty a Demo ukážky</strong>Vytvoríme segmentovo špecifické argumenty, cenové kalkulácie a a ukážky riešení.</li>
+                        <li><strong>Mapovanie konkurencie</strong>Detailná analýza konkurenčných možností, funkcií a cien pre dokonalú a nepriestreľnú argumentáciu.</li>
+                        <li><strong>Efektívny marketing</strong>Nové videá, LinkedIn aktivity, zdielať novinky a vízie</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scrollujte nadol ↓</div>
+    </section>
+
+    <section class="slide">
+        <div class="card-container">
+            <div class="card" onmouseenter="startTilt(this)" onmouseleave="stopTilt(this)" onmousemove="tilt(event, this)">
+                <div class="bg-number">04</div>
+                <div class="card-overlay" onclick="decodeAndReveal(this.parentElement, event)">
+                    <div class="reveal-btn" data-target="ZOBRAZIŤ DETAIL">ZOBRAZIŤ DETAIL</div>
+                </div>
+                <div class="card-header">
+                    <h2 class="card-title">Nová energia v obchode | Motivácia</h2>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Pondelkové porady a Priority</strong>Nastavenie jasných šprintov na týždeň. Zameranie na najpodstatnejšie úlohy, leady a projekty.</li>
+                        <li><strong>Pravidelné vyhodnocovanie</strong>Piatočná retrospektíva – striktné zhodnotenie toho, čo sa reálne podarilo a kde naopak strácame čas.</li>
+                        <li><strong>Tímový Brainstorming</strong>Detailný rozbor projektov. Hľadanie možností zlepšenia procesov ako jeden zjednotený tím.</li>
+                        <li><strong>Support a 1v1</strong>Pravidelné individuálne stretnutia na odstránenie prekážok a manažérsku podporu obchodníkov.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scrollujte nadol ↓</div>
+    </section>
+
+    <section class="slide">
+        <div class="card-container">
+            <div class="card" onmouseenter="startTilt(this)" onmouseleave="stopTilt(this)" onmousemove="tilt(event, this)">
+                <div class="bg-number">05</div>
+                <div class="card-overlay" onclick="decodeAndReveal(this.parentElement, event)">
+                    <div class="reveal-btn" data-target="ZOBRAZIŤ DETAIL">ZOBRAZIŤ DETAIL</div>
+                </div>
+                <div class="card-header">
+                    <h2 class="card-title">Optimalizácia a zrýchlenie procesov</h2>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong> Zmluvy a SLA</strong>Jasne definovaný moment dokončenia projektu a transparentné SLA poplatky, aby sme nestrácali peniaze na zmenách zadania.</li>
+                        <li><strong>Automatizácia Leadov</strong>Zdĺhavý proces manuálneho pridávania musíme zrýchliť a napojiť priamo na existujúce komunikačné kanály.</li>
+                        <li><strong>Zlepšenie vlastného systému</strong>Krátke týždenné šprinty na vylepšovanie nášho vlastného CRM systému.</li>
+                        <li><strong>Reporting</strong>Vyhodnocovanie a manažérske rozhodnutia budeme robiť viac na základe  dát, ako pocitov.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Scrollujte nadol ↓</div>
+    </section>
+
+    <section class="slide">
+        <div class="card-container">
+            <div class="card" onmouseenter="startTilt(this)" onmouseleave="stopTilt(this)" onmousemove="tilt(event, this)">
+                <div class="bg-number">06</div>
+                <div class="card-overlay" onclick="decodeAndReveal(this.parentElement, event)">
+                    <div class="reveal-btn" data-target="ZOBRAZIŤ DETAIL">ZOBRAZIŤ DETAIL</div>
+                </div>
+                <div class="card-header">
+                    <h2 class="card-title">Meranie úspechu (KPI)</h2>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Zvýšenie konverzného pomeru</strong>Zefektívnenie a sprehľadnenie celého procesu: <span class="efektTextu">Marketing → Konzultácia → Predaj analýzy → Predaj prejektu → Dodanie</span>.</li>
+                        <li><strong>Zlepšenie implementácie</strong>Presné dodržiavanie fáz dodania a systematická eliminácia technického dlhu.</li>
+                        <li><strong>Referenčný marketing</strong>Získavanie silných referencií z úspešných projektov ako hlavný argumentačný nástroj pre ďalší predaj.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">Ďakujem za pozornosť :)</div>
+    </section>
+
+    <script>
+        // 1. Skript pre bočnú navigáciu (Bodky)
+        const dots = document.querySelectorAll('.dot');
+        const container = document.body;
+
+        container.addEventListener('scroll', () => {
+            let index = Math.round(container.scrollTop / window.innerHeight);
+            dots.forEach((dot, i) => {
+                if(i === index) {
+                    dot.style.background = 'var(--color-blue)';
+                    dot.style.transform = 'scale(1.3)';
+                } else {
+                    dot.style.background = 'rgba(46, 46, 46, 0.2)';
+                    dot.style.transform = 'scale(1)';
+                }
+            });
+        });
+
+        // 2. Dekódovací efekt pre tlačidlo (Matrix)
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+        
+        function decodeAndReveal(cardElement, event) {
+            if (cardElement.classList.contains('revealed')) return;
+            
+            const btn = cardElement.querySelector('.reveal-btn');
+            const overlay = cardElement.querySelector('.card-overlay');
+            const targetText = btn.getAttribute('data-target');
+            let iteration = 0;
+            let interval = null;
+
+            // Pridaj pule efekt na overlay
+            if (event) createRipple(overlay, event);
+
+            clearInterval(interval);
+            
+            interval = setInterval(() => {
+                btn.innerText = targetText
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < iteration) return targetText[index];
+                        return letters[Math.floor(Math.random() * letters.length)];
+                    })
+                    .join("");
+                
+                if(iteration >= targetText.length){ 
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        cardElement.classList.add('revealed');
+                        tiltActive = true; 
+                        cardElement.style.transition = 'none';
+                    }, 200); 
+                }
+                iteration += 1 / 3;
+            }, 25);
+        }
+
+        // Ripple efekt
+        function createRipple(element, event) {
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(235, 178, 45, 0.6)';
+            ripple.style.width = ripple.style.height = '20px';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.animation = 'rippleEffect 0.6s ease-out';
+            ripple.style.left = ripple.style.top = '-10px';
+            element.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        // CSS pre ripple efekt
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 3. 3D Tilt Efekt (nakláňanie okna za myšou)
+        let tiltActive = false;
+
+        function startTilt(element) {
+            if(element.classList.contains('revealed')) {
+                tiltActive = true;
+                element.style.transition = 'none'; 
+            }
+        }
+
+        function stopTilt(element) {
+            tiltActive = false;
+            element.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease';
+            element.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg)`;
+        }
+
+        function tilt(event, element) {
+            if (!tiltActive || !element.classList.contains('revealed')) return;
+
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left; 
+            const y = event.clientY - rect.top;
+            
+            const xRot = ((y / rect.height) - 0.5) * -10; 
+            const yRot = ((x / rect.width) - 0.5) * 10;
+            
+            element.style.transform = `perspective(1200px) rotateX(${xRot}deg) rotateY(${yRot}deg)`;
+        }
+    </script>
+</body>
+</html>
