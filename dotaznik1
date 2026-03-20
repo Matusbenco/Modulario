@@ -1250,7 +1250,7 @@ textarea::placeholder, input::placeholder { color: var(--text-dim); }
 <!-- ══ EMAIL + SUBMIT ══ -->
 <div class="email-section">
   <h3>Takmer hotovo ✦</h3>
-  <p>Zadajte Váš email — odpovede Vám zašleme ako kópiu a my sa Vám ozveme s orientačnou cenou.</p>
+  <p>Zadajte Váš email.</p>
   <div class="email-input-wrap">
     <input type="email" name="email" placeholder="vas@email.com" required>
   </div>
